@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from rstr import xeger
-from urllib.parse import quote
+from urllib.parse import quote, unquote
 
 app = Flask(__name__)
 
@@ -32,6 +32,7 @@ def create():
 @app.route('/<path:url>')
 def other_urls(url):
     try:
+        print(f"url: {url}, thing: {unquote(url)}"
         return redirect(short_urls[unquote(url)], code=302)
     except:
         return redirect('/', code=302)
