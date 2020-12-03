@@ -32,8 +32,9 @@ def create():
 @app.route('/<path:url>')
 def other_urls(url):
     try:
-        print(f"url: {url}, thing: {unquote(url)}"
-        return redirect(short_urls[unquote(url)], code=302)
+        redirect_link = short_urls[unquote(url)]
+        print(redirect_link)
+        return redirect(redirect_link, code=302)
     except:
         return redirect('/', code=302)
 
