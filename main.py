@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-import rstr
+from rstr import xeger
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ short_urls = {}
 
 
 def generate_url():
-    return rstr.xeger(r'[a-z]{100}')
+    return rstr.xeger(r'[li!ìíîïj|I†t1¦]{7,15}')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -18,9 +18,15 @@ def index():
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     original_url = request.form.get('originalurl')
-    new_url = generate_url()
-    short_urls[new_url] = original_url
-    return render_template("create.html", result=new_url)
+    generated_url = generate_url()
+    i = 0
+    while generated_url in short_urls and i < 100:
+        generated_url = generate_url()
+        i += 1
+
+    print(f"Generated new link: {generated_url} = {original_url}")
+    short_urls[generated_url] = original_url
+    return render_template("create.html", result=generated_url)
 
 @app.route('/<path:url>')
 def other_urls(url):

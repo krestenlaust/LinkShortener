@@ -3,17 +3,18 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-	<title>URL Forlænger</title>
+	<title>URL Forkorter</title>
 	<link rel="stylesheet" href="https://unpkg.com/mvp.css">
 </head>
 <body>
 	<div style="margin: auto;text-align: center;width: 50%">
-		<h1>Link Forlænger</h1>
+		<h1>Link Forkorter</h1>
 		<form action="/">
 			<label>Dit forkortet link:</label>
-			<textarea autofocus style="width: 100%;margin: 0">http://5.186.139.36:8080/{{ result }}</textarea><br>
+			<textarea autofocus style="width: 100%;margin: 0" id="new_link">Loading...</textarea><br>
 			<input type="submit" value="Tilbage">
 		</form>
 	</div>
 </body>
 </html>
+<script>new_link.value = window.location.hostname + "/{{ result }}";</script>
