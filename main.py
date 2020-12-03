@@ -32,6 +32,7 @@ def create():
 @app.route('/<path:url>')
 def other_urls(url):
     try:
+        print("url:" + url)
         redirect_link = short_urls[unquote(url)]
         print(redirect_link)
         return redirect(redirect_link, code=302)
