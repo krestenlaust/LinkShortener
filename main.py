@@ -26,13 +26,13 @@ def create():
         i += 1
 
     print(f"Generated new link: {generated_url} = {original_url}")
-    short_urls[quote(generated_url)] = original_url
+    short_urls[generated_url] = original_url
     return render_template("create.html", result=generated_url)
 
 @app.route('/<path:url>')
 def other_urls(url):
     try:
-        return redirect(short_urls[url], code=302)
+        return redirect(short_urls[unquote(url)], code=302)
     except:
         return redirect('/', code=302)
 
