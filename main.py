@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect
 from rstr import xeger
+from urllib.parse import quote
 
 app = Flask(__name__)
 
@@ -25,7 +26,7 @@ def create():
         i += 1
 
     print(f"Generated new link: {generated_url} = {original_url}")
-    short_urls[generated_url] = original_url
+    short_urls[quote(generated_url)] = original_url
     return render_template("create.html", result=generated_url)
 
 @app.route('/<path:url>')
