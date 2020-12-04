@@ -40,6 +40,7 @@ def other_urls(url):
         print("Found reference")
         return redirect(short_urls[url], code=302)
 
+    print(short_urls)
     print("Unknown: " + url)
     return redirect('/', code=302)
 
