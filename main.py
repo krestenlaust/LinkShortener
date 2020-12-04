@@ -23,6 +23,7 @@ def connect_db(url):
         shortlink VARCHAR(2083) NOT NULL PRIMARY KEY,
         originallink VARCHAR(2083) NOT NULL
         );''')
+        conn.commit()
 
     return conn
 
@@ -30,17 +31,14 @@ def connect_db(url):
 def set_url(short_link: str, original_link: str):
     conn = get_db()
     with conn.cursor() as curs:
-        curs.execute("""INSERT INTO links(shortlink, originallink)
-        VALUES(
-            %s,
-            %s
-        );""", (short_link, original_link))
+        curs.execute("INSERT INTO links(shortlink, originallink) VALUES(%s, %s);", (short_link, original_link))
+        conn.commit()
 
 
 def get_url(short_link: str) -> str:
     conn = get_db()
     with conn.cursor() as curs:
-        curs.execute("""SELECT originallink FROM links WHERE shortlink = %s;""", (short_link,))
+        curs.execute("SELECT originallink FROM links WHERE shortlink = %s;", (short_link,))
         link = curs.fetchone()
         return link if link is not None else "/"
 
