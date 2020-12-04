@@ -40,7 +40,7 @@ def set_url(short_link: str, original_link: str):
 def get_url(short_link: str) -> str:
     conn = get_db()
     with conn.cursor() as curs:
-        curs.execute('''SELECT originallink WHERE shortlink=%s''', (short_link))
+        curs.execute('''SELECT originallink FROM links WHERE shortlink = %s''', (short_link))
         link = curs.fetchone()
         return link if link is not None else "/"
 
