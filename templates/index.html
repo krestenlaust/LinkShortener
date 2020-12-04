@@ -3,16 +3,26 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>URL Forkorter</title>
+    <title>Kresten's Link forkorter</title>
 	<link rel="stylesheet" href="https://unpkg.com/mvp.css">
+	<style>
+	input#originalurl:focus,input#originalurl:hover {
+		width: 90%;
+		transition-duration: 1s;
+	}
+	input#originalurl {
+		width: 40%;
+		transition-duration: 250ms;
+	}
+	</style>
 </head>
 <body>
 	<div style="margin: auto;text-align: center;width: 50%">
 		<h1>Link Forkorter</h1>
 		<form action="/create" method="post">
-			<label for="originalurl">Original URL:</label>
-			<input type="text" name="originalurl" id="originalurl"><br>
-			<input type="submit" value="Submit">
+			<label for="originalurl">Link, som skal forkortes:</label>
+			<input type="text" name="originalurl" id="originalurl" required><br>
+			<input type="submit" value="Forkort">
 		</form>
 	</div>
 </body>
