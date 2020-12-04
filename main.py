@@ -44,7 +44,7 @@ def get_url(short_link: str) -> str:
 
 
 def generate_url():
-    return xeger(r'[li!ìíîïj|I†t1¦]{7,15}')
+    return xeger(r'[li!ìíîï|I1]{8}')
 
 
 @app.route('/', methods=['GET', 'POST'])
