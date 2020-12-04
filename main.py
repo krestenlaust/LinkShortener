@@ -20,7 +20,7 @@ def connect_db(url):
     conn = psycopg2.connect(url, sslmode='require')
     with conn.cursor() as curs:
         curs.execute('''CREATE TABLE IF NOT EXISTS links(
-        shortlink VARCHAR(2083) NOT NULL PRIMARY KEY
+        shortlink VARCHAR(2083) NOT NULL PRIMARY KEY,
         originallink VARCHAR(2083) NOT NULL
         );''')
 
