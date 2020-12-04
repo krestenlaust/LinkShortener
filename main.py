@@ -40,7 +40,7 @@ def get_url(short_link: str) -> str:
     with conn.cursor() as curs:
         curs.execute("SELECT originallink FROM links WHERE shortlink = %s;", (short_link,))
         link = curs.fetchone()
-        return link if link is not None else "/"
+        return link[0] if link is not None else "/"
 
 
 def generate_url():
