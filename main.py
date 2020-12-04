@@ -16,6 +16,7 @@ def generate_url():
 def index():
     return render_template("index.html")
 
+
 @app.route('/create', methods=['GET', 'POST'])
 def create():
     original_url = request.form.get('originalurl')
@@ -25,21 +26,23 @@ def create():
         generated_url = generate_url()
         i += 1
 
+    if not original_url.startswith('http://') and not original_url.startswith('https://'):
+        original_url = "http://" + original_url
+
     print(f"Generated new link: {generated_url} = {original_url}")
     short_urls[generated_url] = original_url
     return render_template("create.html", result=generated_url)
 
+
 @app.route('/<path:url>')
 def other_urls(url):
-    try:
-        print("url:" + url)
-        redirect_link = short_urls[unquote(url)]
-        print(redirect_link)
-        return redirect(redirect_link, code=302)
-    except:
-        return redirect('/', code=302)
+    if url in short_urls:
+        print("Found reference")
+        return redirect(short_urls[url], code=302)
+
+    print("Unknown: " + url)
+    return redirect('/', code=302)
 
 
 if __name__ == '__main__':
     app.run(threaded=True, port=5000)
-    
