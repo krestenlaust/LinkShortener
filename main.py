@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, g
 from rstr import xeger
+import randomEmoji
 import psycopg2
 import os
 
@@ -43,8 +44,15 @@ def get_url(short_link: str) -> str:
         return link[0] if link is not None else "/"
 
 
-def generate_url():
-    return xeger(r'[llΙI∣।ǀІ𐌠ⅼ౹ꞁ𐌉❘]{8}')
+def generate_url(emoji: bool):
+    url = ""
+    if emoji:
+        for emoji in randomEmoji.emoji_generator(3):
+            url += emoji
+    else:
+        url = xeger(r'[llΙI∣।ǀІ𐌠ⅼ౹ꞁ𐌉❘]{8}')
+
+    return url
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -54,8 +62,9 @@ def index():
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
-    original_url = request.form.get('originalurl')
-    generated_url = generate_url()
+    original_url: str = request.form.get('originalurl')
+    emoji_mode: bool = request.form.get('emoji') is not None
+    generated_url = generate_url(emoji_mode)
 
     if not original_url.startswith('http://') and not original_url.startswith('https://'):
         original_url = "http://" + original_url
