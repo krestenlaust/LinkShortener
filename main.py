@@ -3,6 +3,7 @@ from rstr import xeger
 import randomEmoji
 import psycopg2
 import os
+import ssl
 
 app = Flask(__name__)
 
@@ -88,4 +89,9 @@ def other_urls(url):
 
 
 if __name__ == '__main__':
-    app.run(port=5000)
+    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+    context.verify_mode = ssl.CERT_REQUIRED
+    context.load_verify_locations("ca.crt")
+    context.load_cert_chain("public.key.pem", "private.key.pem")
+
+    app.run(port=5000, ssl_context=context)
