@@ -74,6 +74,11 @@ def create():
     return render_template("create.html", result=generated_url)
 
 
+@app.route('/metoder/brainstorm', methods=['GET', 'POST'])
+def brainstorm():
+    return render_template("metoder/brainstorm.html")
+
+
 @app.route('/<path:url>')
 def other_urls(url):
     target_url = get_url(url)
