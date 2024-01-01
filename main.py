@@ -45,9 +45,9 @@ def get_url(short_link: str) -> str:
         return link[0] if link is not None else "/"
 
 
-def generate_url(emoji: bool):
-    url = ""
+def generate_url(emoji: bool) -> str:
     if emoji:
+        url = ""
         for emoji in randomEmoji.emoji_generator(3):
             url += emoji
     else:
