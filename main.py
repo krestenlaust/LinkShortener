@@ -1,6 +1,7 @@
 import os
 import psycopg2
 import ssl
+import sys
 from flask import Flask, render_template, request, redirect, g
 from rstr import xeger
 
@@ -89,9 +90,12 @@ def other_urls(url):
 
 
 if __name__ == '__main__':
-    context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-    context.verify_mode = ssl.CERT_REQUIRED
-    context.load_verify_locations("ca.crt")
-    context.load_cert_chain("public.key.pem", "private.key.pem")
+    if "--http-only" in sys.argv:
+        app.run(port=5000)
+    else:
+        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+        context.verify_mode = ssl.CERT_REQUIRED
+        context.load_verify_locations("domain.cert.pem")
+        context.load_cert_chain("public.key.pem", "private.key.pem")
 
-    app.run(port=5000, ssl_context=context)
+        app.run(port=5000, ssl_context=context)
