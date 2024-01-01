@@ -1,6 +1,9 @@
 # Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
+RUN apt-get update && \
+    apt-get install -y libpq-dev gcc
+
 # Set the working directory to /app
 WORKDIR /app
 
@@ -15,4 +18,4 @@ EXPOSE 80
 EXPOSE 443
 
 # Run app.py when the container launches
-CMD ["python", "main.py"]
+CMD ["python", "main.py", "--http-only"]
