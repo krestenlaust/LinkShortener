@@ -91,11 +91,11 @@ def other_urls(url):
 
 if __name__ == '__main__':
     if "--http-only" in sys.argv:
-        app.run(port=5000)
+        app.run(port=80)
     else:
         context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
         context.verify_mode = ssl.CERT_REQUIRED
         context.load_verify_locations("domain.cert.pem")
         context.load_cert_chain("public.key.pem", "private.key.pem")
 
-        app.run(port=5000, ssl_context=context)
+        app.run(port=443, ssl_context=context)
