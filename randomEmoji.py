@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # original source: https://gist.github.com/shello/efa2655e8a7bce52f273
 
-from itertools import accumulate
 from bisect import bisect
+from itertools import accumulate
 from random import randrange
 
 # Set the unicode version.
@@ -20,7 +20,7 @@ EMOJI_RANGES_UNICODE = {
         ('\U0001F3C6', '\U0001F3CA'),
         ('\U0001F3E0', '\U0001F3F0'),
         ('\U0001F400', '\U0001F43E'),
-        ('\U0001F440', ),
+        ('\U0001F440',),
         ('\U0001F442', '\U0001F4F7'),
         ('\U0001F4F9', '\U0001F4FC'),
         ('\U0001F500', '\U0001F53C'),
@@ -49,7 +49,7 @@ EMOJI_RANGES_UNICODE = {
 NO_NAME_ERROR = '(No name found for this codepoint)'
 
 
-def random_emoji(unicode_version = 6):
+def random_emoji(unicode_version=6):
     if unicode_version in EMOJI_RANGES_UNICODE:
         emoji_ranges = EMOJI_RANGES_UNICODE[unicode_version]
     else:
@@ -78,5 +78,5 @@ def random_emoji(unicode_version = 6):
 
 
 def emoji_generator(count: int):
-    for i in range(count):
+    for _ in range(count):
         yield random_emoji()

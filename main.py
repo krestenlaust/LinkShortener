@@ -1,12 +1,12 @@
+import os
+import psycopg2
+import ssl
 from flask import Flask, render_template, request, redirect, g
 from rstr import xeger
+
 import randomEmoji
-import psycopg2
-import os
-import ssl
 
 app = Flask(__name__)
-
 
 short_urls = {}
 
